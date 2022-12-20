@@ -1,0 +1,24 @@
+<div *ngIf="product.payload.val().title" class="card mb-4" style="width: 18rem;">
+  <img class="card-img-top" [src]="product.payload.val().imgUrl">
+  <div class="card-body">
+    <!-- <h5 class="card-title">{{product.payload.val().category | titlecase}}</h5> -->
+    <h5 class="card-title">{{product.payload.val().title | titlecase}}</h5>
+    <p class="card-text">{{product.payload.val().price | currency}}</p>
+  </div>
+  <div class="card-footer">
+    <button *ngIf="getQuentity() === 0; else updateQuentity" class="btn btn-dark btn-block" (click)="addToCart()">Add To Card</button>
+  </div>
+  <ng-template #updateQuentity>
+    <div class="row no-gutters">
+      <div class="col-2">
+        <button class="btn btn-dark btn-block font-weight-bold" (click)="addToCart()">+</button>
+      </div>
+      <div class="col text-center d-flex align-items-center justify-content-center h6">
+        {{getQuentity()}} In Cart
+      </div>
+      <div class="col-2">
+        <button class="btn btn-dark btn-block font-weight-bold" (click)="removeFromCart()">-</button>
+      </div>
+    </div>
+  </ng-template>
+</div>

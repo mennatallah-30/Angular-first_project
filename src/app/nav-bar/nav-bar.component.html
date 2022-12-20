@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" routerLink="/products">Store App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/shopping">Shopping Card  <span class="badge-pill badge badge-warning" *ngIf="shoppingCartNum != 0" >{{shoppingCartNum}}</span></a>
+
+      </li>
+      <ng-template #showLogin>
+        <a routerLink="/login" class="nav-link">Login</a>
+      </ng-template>
+      <li class="nav-item dropdown" ngbDropdown *ngIf="appUser.name else showLogin" >
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" role="button" ngbDropdownToggle >{{appUser.name}}</a>
+        <div class="dropdown-menu" ngbDropdownMenu >
+          <a class="dropdown-item" routerLink="/orders">My Orders</a>
+          <ng-container *ngIf="appUser.isAdmin">
+            <a class="dropdown-item" routerLink="/admin/orders">Manager orders</a>
+            <a class="dropdown-item" routerLink="/admin/products">Manager products</a>
+          </ng-container>
+          <a class="dropdown-item" routerLink="/" (click)="logout()">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
